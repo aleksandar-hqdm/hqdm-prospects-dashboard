@@ -49,10 +49,23 @@ details[open]>summary .lbl-hide{display:inline}
     <h2 class="text-sm font-bold uppercase tracking-wider text-ink-600 mb-3">The story in three beats</h2>
     <div class="grid md:grid-cols-3 gap-4" id="beats"></div>
   </div>
-  <div class="rounded-xl border border-amber-200 bg-amber-50 p-5">
+  <div class="rounded-xl border border-amber-200 bg-amber-50 p-5 sm:p-6">
     <div class="text-[11px] font-bold uppercase tracking-widest text-accent-amber">What they are leaving on the table</div>
     <h2 class="text-2xl font-extrabold mt-1" id="opp-line"></h2>
     <p class="text-sm text-ink-600 mt-2" id="opp-sub"></p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5" id="opp-funnel"></div>
+    <div class="bg-white/70 rounded-lg border border-amber-200 p-4 mt-4">
+      <div class="text-xs font-bold uppercase tracking-wider text-ink-600 mb-2">How the demand number is built</div>
+      <div id="opp-demand"></div>
+    </div>
+    <div class="mt-4">
+      <div class="text-xs font-bold uppercase tracking-wider text-ink-600 mb-2">Three scenarios, by how aggressively we capture the market</div>
+      <div class="bg-white rounded-lg border border-slate-200 overflow-x-auto"><table class="ev w-full text-xs" id="opp-scen"></table></div>
+    </div>
+    <details class="bg-white rounded-lg border border-slate-200 mt-3 overflow-hidden">
+      <summary class="px-4 py-3 flex items-center justify-between hover:bg-slate-50"><span class="font-semibold text-sm">How we calculated this, and what is assumed</span><span class="text-xs font-semibold text-brand-500"><span class="lbl-show">Show</span><span class="lbl-hide">Hide</span></span></summary>
+      <div class="px-4 pb-4 pt-2 border-t border-slate-100 text-xs text-ink-600 leading-relaxed" id="opp-method"></div>
+    </details>
   </div>
   <div>
     <h2 class="text-sm font-bold uppercase tracking-wider text-ink-600 mb-3">Who is ahead of them on the map</h2>
@@ -98,6 +111,7 @@ details[open]>summary .lbl-hide{display:inline}
 <script>
 const DATA=JSON.parse(document.getElementById('data').textContent);
 const fmt=n=>(n==null||Number.isNaN(n))?'-':Number(n).toLocaleString();
+const pct=f=>(+(Number(f)*100).toFixed(1))+'%';
 const el=id=>document.getElementById(id);
 const m=DATA.meta,d=DATA.demand,lm=DATA.leadmodel,sc=lm.scenarios,mp=DATA.maps,g=DATA.gbp||{};
 el('h-firm').textContent=m.firm; el('h-date').textContent=m.prepared;
@@ -118,7 +132,18 @@ el('beats').innerHTML=[
  {t:'Absent from AI answers',b:'Across 12 buyer questions, none of ChatGPT, Gemini, Perplexity, or Claude named the firm. They recommend John Foy, Gary Martin Hays, and Cochran instead.'}
 ].map(x=>`<div class="bg-white rounded-xl border border-slate-200 p-4"><div class="font-bold text-sm">${x.t}</div><p class="text-sm text-ink-600 mt-1">${x.b}</p></div>`).join('');
 el('opp-line').textContent='A modeled ~'+fmt(sc[1].leads)+' qualified leads a month';
-el('opp-sub').textContent='Range ~'+fmt(sc[0].leads)+' to ~'+fmt(sc[2].leads)+' a month depending on how aggressively we capture the market. Modeled from ~'+fmt(d.modeled_total_demand)+' Atlanta searches a month at benchmark click and contact rates. The firm captures almost none of this today.';
+el('opp-sub').textContent='That is the midpoint. The range is ~'+fmt(sc[0].leads)+' to ~'+fmt(sc[2].leads)+' a month depending on how aggressively we capture the market. Here is exactly how that number is built, so you can walk them through it.';
+el('opp-funnel').innerHTML=[
+ {l:'1. Monthly demand',v:fmt(lm.lead_base),n:'Atlanta searches a month for these services'},
+ {l:'2. Visits we win',v:'~'+fmt(sc[1].clicks),n:'At '+pct(sc[1].capture)+' click capture from strong rankings'},
+ {l:'3. Leads',v:'~'+fmt(sc[1].leads),n:'At a '+pct(sc[1].lead_rate)+' call-or-form rate'}
+].map(f=>`<div class="bg-white rounded-lg border border-slate-200 p-4"><div class="text-[11px] uppercase tracking-wider text-ink-500">${f.l}</div><div class="text-2xl font-extrabold mt-1">${f.v}</div><div class="text-[11px] text-ink-500 mt-1">${f.n}</div></div>`).join('');
+el('opp-demand').innerHTML=
+ '<div class="flex justify-between gap-3 py-1 text-sm border-b border-slate-100"><span>Geo-explicit Atlanta searches (people who type a city name)</span><b class="whitespace-nowrap">'+fmt(d.city_total_all)+' /mo</b></div>'+
+ '<div class="flex justify-between gap-3 py-1 text-sm border-b border-slate-100"><span>+ Atlanta\'s '+pct(d.atl_share)+' share of the national "near me" pool ('+fmt(d.near_me_total)+'/mo)</span><b class="whitespace-nowrap">'+fmt(d.near_me_atl_modeled)+' /mo</b></div>'+
+ '<div class="flex justify-between gap-3 py-1.5 text-sm font-bold"><span>= Modeled total Atlanta demand</span><b class="whitespace-nowrap">'+fmt(d.modeled_total_demand)+' /mo</b></div>';
+el('opp-scen').innerHTML='<thead><tr><th>Scenario</th><th class="r">Click capture</th><th class="r">Call/form rate</th><th class="r">Visits / mo</th><th class="r">Leads / mo</th></tr></thead><tbody>'+sc.map(s=>`<tr><td>${s.name}</td><td class="r">${pct(s.capture)}</td><td class="r">${pct(s.lead_rate)}</td><td class="r">${fmt(s.clicks)}</td><td class="r" style="font-weight:700">${fmt(s.leads)}</td></tr>`).join('')+'</tbody>';
+el('opp-method').innerHTML='<b>Demand.</b> The geo-explicit Atlanta volume ('+fmt(d.city_total_all)+'/mo) plus Atlanta\'s revealed share of national "near me" searches. That share is the geo-explicit volume divided by the national pools: '+fmt(d.city_total_all)+' / '+fmt(d.national_pools)+' = '+pct(d.atl_share)+', applied to the '+fmt(d.near_me_total)+' national "near me" pool, which adds '+fmt(d.near_me_atl_modeled)+'/mo. <b>Capture and contact rates.</b> Published benchmark ranges for local-service search, not Flanagan-specific. Click capture is the share of those searches that become website visits once the firm ranks well; the call-or-form rate is the share of visits that become an inquiry. <b>Left out as upside.</b> The broad national pool would add about '+fmt(d.broad_atl_modeled)+'/mo more at the same share; a conservative population-share floor would instead put near-me at about '+fmt(lm.near_me_atl_floor)+'/mo. <b>Status.</b> There is no analytics or call tracking on the site yet, so these figures are modeled, not measured, and we baseline them with tracking before promising anything. To turn leads into revenue, multiply by the firm\'s signed-case rate and average case value.';
 (function(){
  const lb=(mp.leaderboard||[]).slice(0,7);
  const th='<thead><tr>'+['Firm','Rating','Reviews','Top-3 cells'].map((h,i)=>`<th class="${i?'text-right':'text-left'} px-3 py-2 font-semibold text-ink-600 border-b">${h}</th>`).join('')+'</tr></thead>';
