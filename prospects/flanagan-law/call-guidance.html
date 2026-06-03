@@ -121,8 +121,7 @@ el('open-line').textContent='You have one of the best-reviewed personal injury p
 el('numbers').innerHTML=[
  ['0 of 20','page-one rankings on core Atlanta searches'],
  ['0 of 52','top-3 map spots across the metro grid'],
- ['#'+((mp.client||{}).market_rank_by_quality||'-'),'rank by map quality'],
- ['0 of 4','AI assistants that mention the firm'],
+ ['0 of 4','AI assistants that name the firm, across '+(((DATA.llm||{}).prompts_tested)||12)+' buyer questions'],
  ['~'+fmt(d.modeled_total_demand),'modeled Atlanta searches a month'],
  [((g.rating||{}).value||'-')+' stars','with '+fmt((g.rating||{}).votes)+' reviews (the strength)']
 ].map(x=>`<div class="bg-white rounded-xl border border-slate-200 p-4"><div class="text-2xl font-extrabold">${x[0]}</div><div class="text-xs text-ink-500 mt-1">${x[1]}</div></div>`).join('');
