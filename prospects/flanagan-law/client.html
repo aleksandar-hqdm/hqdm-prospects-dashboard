@@ -54,6 +54,8 @@ tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-seri
 
   <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="c-tiles"></div>
 
+  <div class="rounded-xl border border-slate-200 p-5" id="c-gbp"></div>
+
   <div class="rounded-xl border border-slate-200 p-5">
     <div class="text-base font-bold text-ink-800">What Atlanta searches for, by service</div>
     <p class="text-sm text-ink-500 mt-1 mb-3">Searches a month in the Atlanta market, by practice area. "Local" names a city; "near me" is the projected Atlanta share of national "near me" searches.</p>
@@ -82,8 +84,9 @@ tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-seri
   </div>
 
   <div>
-    <div class="text-sm font-bold uppercase tracking-wider text-ink-600 mb-2">What it takes</div>
-    <ul class="space-y-2" id="c-steps"></ul>
+    <div class="text-base font-bold text-ink-800 mb-1">Focus areas</div>
+    <p class="text-sm text-ink-500 mb-3">Where the work goes, in order of impact.</p>
+    <div class="grid md:grid-cols-2 gap-4" id="c-focus"></div>
   </div>
 </main>
 <footer class="max-w-3xl mx-auto px-5 py-8 text-xs text-ink-500" id="c-foot"></footer>
@@ -103,6 +106,18 @@ el('c-diag').textContent='You have one of the best-reviewed injury firms in Atla
 el('c-opp').textContent='~'+fmt(sc[1].leads)+' more leads a month';
 el('c-opp-sub').textContent='A realistic, modeled estimate once you are visible across the map, on the searches that matter, and in AI answers. We confirm it with tracking before we promise it.';
 el('c-opp-poss').textContent='~'+fmt(sc[1].leads)+' / mo';
+
+// Your Google profile card
+(function(){
+ const gp=DATA.gbp; if(!gp){el('c-gbp').style.display='none';return;}
+ const r=gp.rating||{}, rev=gp.reviews||{}, p=gp.profile||{};
+ el('c-gbp').innerHTML='<div class="text-[11px] font-bold uppercase tracking-widest text-brand-500">Your own Google profile</div>'+
+  '<div class="font-bold text-lg mt-1">A strong reputation, trapped near the office</div>'+
+  '<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">'+
+  [['Rating',(r.value!=null?r.value+'★':'-')],['Reviews',fmt(r.votes)],['Profile complete',(gp.completeness_pct!=null?gp.completeness_pct+'%':'-')],['Reviews last 90 days',fmt(rev.recent_90d)]].map(t=>`<div><div class="text-xs uppercase tracking-wider text-ink-500">${t[0]}</div><div class="text-2xl font-extrabold">${t[1]}</div></div>`).join('')+
+  '</div>'+
+  `<p class="text-sm text-ink-600 mt-4">You have a <b>${r.value}-star profile with ${fmt(r.votes)} reviews</b>, yet you rank in the top three on the map nowhere across the metro. The reputation is real, the reach is not. Two quick gaps stand out: you reply to <b>${rev.owner_response_rate_pct!=null?rev.owner_response_rate_pct+'%':'-'}</b> of reviews and the profile has <b>${p.has_hours?'hours set':'no hours set'}</b>. The bigger issue is that the website gives Google almost no local signal to connect that profile to searches beyond your office address.</p>`;
+})();
 
 // Keyword clusters with regional volume + modeled missed traffic
 (function(){
@@ -148,12 +163,7 @@ el('c-tiles').innerHTML=[
  el('c-ai').innerHTML=h;
 })();
 
-el('c-steps').innerHTML=[
- 'Show up on the map across the whole metro, not just near your office.',
- 'Make your service pages rank for the searches people actually use.',
- 'Get found and recommended by AI assistants while the field is still open.',
- 'Turn your excellent reviews into reach with the right local setup.'
-].map(s=>`<li class="flex gap-2 text-base text-ink-700"><span class="text-brand-500 mt-1">&#10003;</span><span>${s}</span></li>`).join('');
+el('c-focus').innerHTML=(DATA.strategy||[]).map(s=>`<div class="bg-white rounded-xl border border-slate-200 p-5"><div class="text-[11px] font-bold uppercase tracking-widest text-brand-500">${s.tag}</div><h3 class="font-bold text-lg mt-1 leading-snug">${s.title}</h3><p class="text-sm text-ink-600 mt-2">${s.why}</p><ul class="mt-3 space-y-1.5">${(s.actions||[]).map(a=>`<li class="text-sm text-ink-700 flex gap-2"><span class="text-brand-500 mt-0.5">&bull;</span><span>${a}</span></li>`).join('')}</ul></div>`).join('');
 el('c-foot').textContent='Prepared by HQDM on '+m.prepared+'. Figures are modeled from Google search data to show the size of the opportunity, and are confirmed with live tracking once work begins.';
 </script>
 </body>
