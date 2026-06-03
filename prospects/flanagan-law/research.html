@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Flanagan Law - SEO Opportunity - HQDM</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script>
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans:['Inter','system-ui','sans-serif'], mono:['"JetBrains Mono"','ui-monospace','monospace'] },
+  colors: {
+    ink:{900:'#0b1220',800:'#111827',700:'#1f2937',600:'#374151',500:'#6b7280',400:'#9ca3af',300:'#d1d5db'},
+    brand:{900:'#0b2545',700:'#13315c',500:'#1d5b8a',400:'#3b82f6',300:'#8ecae6'},
+    accent:{teal:'#0ea5a4',amber:'#f59e0b',red:'#ef4444',green:'#10b981',indigo:'#6366f1',purple:'#8b5cf6'}
+  }
+}}}
+</script>
+<style>
+  .hcell{font-variant-numeric:tabular-nums}
+  th.sortable{cursor:pointer;user-select:none}
+  th.sortable:hover{background:#eef2f7}
+  .sticky-col{position:sticky;left:0;background:#fff;z-index:5}
+  thead .sticky-col{background:#f8fafc}
+</style>
+</head>
+<body class="bg-slate-50 text-ink-800 font-sans antialiased">
+
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+    <div class="min-w-0">
+      <div class="font-semibold text-sm sm:text-base truncate" id="h-firm"></div>
+      <div class="text-xs text-ink-500">SEO Opportunity Snapshot</div>
+    </div>
+    <nav class="hidden lg:flex gap-1 text-xs font-medium">
+      <a href="#tldr" class="px-3 py-1.5 rounded hover:bg-slate-100">Summary</a>
+      <a href="#demand" class="px-3 py-1.5 rounded hover:bg-slate-100">Demand</a>
+      <a href="#maps" class="px-3 py-1.5 rounded hover:bg-slate-100">Maps</a>
+      <a href="#competition" class="px-3 py-1.5 rounded hover:bg-slate-100">Competitors</a>
+      <a href="#ai" class="px-3 py-1.5 rounded hover:bg-slate-100">AI Search</a>
+      <a href="#site" class="px-3 py-1.5 rounded hover:bg-slate-100">Site</a>
+      <a href="#opportunity" class="px-3 py-1.5 rounded hover:bg-slate-100">Opportunity</a>
+      <a href="#strategy" class="px-3 py-1.5 rounded hover:bg-slate-100">Strategy</a>
+    </nav>
+    <div class="text-xs text-ink-500 font-mono hidden md:block" id="h-date"></div>
+  </div>
+</header>
+
+<section class="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-700 to-brand-500 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-14 relative">
+    <div class="text-xs font-semibold uppercase tracking-widest text-brand-300 mb-3" id="hero-status"></div>
+    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight" id="hero-firm"></h1>
+    <p class="text-lg sm:text-xl mt-3 text-brand-300" id="hero-tagline"></p>
+    <div class="mt-7 flex flex-wrap gap-3 text-xs">
+      <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/20"><span class="text-white/60">Domain</span> <span class="font-mono" id="hero-domain"></span></span>
+      <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/20"><span class="text-white/60">Office</span> <span id="hero-addr"></span></span>
+      <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/20"><span class="text-white/60">Prepared by</span> <span id="hero-author"></span></span>
+    </div>
+  </div>
+</section>
+
+<section id="tldr" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+  <div class="border-l-4 border-brand-500 bg-white rounded-r-lg shadow-sm p-6">
+    <div class="text-xs font-bold uppercase tracking-widest text-brand-500 mb-2">The short version</div>
+    <p class="text-sm sm:text-base text-ink-700 leading-relaxed" id="tldr-body"></p>
+  </div>
+  <div id="kpi-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6"></div>
+</section>
+
+<!-- DEMAND -->
+<section id="demand" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+  <h2 class="text-2xl font-bold tracking-tight">Market demand: what Atlanta is searching for</h2>
+  <p class="text-sm text-ink-600 mt-1 max-w-3xl">Monthly Google search volume by practice area and location (lawyer and attorney variants combined). City columns are genuinely local. "Near me" and "Broad" are national pools; rather than adding the raw national number, we model Atlanta's share of "near me" from the data (method below the table).</p>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+      <div class="text-xs uppercase tracking-wider text-ink-500">Geo-explicit local demand</div>
+      <div class="text-3xl font-extrabold mt-1" id="d-local"></div>
+      <div class="text-xs text-ink-500 mt-1" id="d-local-note"></div>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+      <div class="text-xs uppercase tracking-wider text-ink-500">National "near me" pool</div>
+      <div class="text-3xl font-extrabold mt-1" id="d-nearme"></div>
+      <div class="text-xs text-ink-500 mt-1" id="d-nearme-note"></div>
+    </div>
+    <div class="bg-white rounded-xl border border-brand-200 shadow-sm p-5 ring-1 ring-brand-500/20" style="background:linear-gradient(to bottom right,#fff,#eff6ff)">
+      <div class="text-xs uppercase tracking-wider text-brand-700">Modeled total Atlanta demand</div>
+      <div class="text-3xl font-extrabold mt-1 text-brand-700" id="d-total"></div>
+      <div class="text-xs text-ink-500 mt-1" id="d-total-note"></div>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+      <div class="text-xs uppercase tracking-wider text-ink-500">Highest-value click</div>
+      <div class="text-3xl font-extrabold mt-1" id="d-cpc"></div>
+      <div class="text-xs text-ink-500 mt-1">Top advertiser bid for one click here, a proxy for case value.</div>
+    </div>
+  </div>
+  <div class="bg-brand-50 border border-brand-200 rounded-xl mt-4 p-4 text-xs text-ink-600 leading-relaxed" id="nearme-method"></div>
+  <div class="bg-white rounded-xl border border-slate-200 shadow-sm mt-5 p-5">
+    <div class="h-72"><canvas id="demand-chart"></canvas></div>
+  </div>
+  <div class="bg-white rounded-xl border border-slate-200 shadow-sm mt-5 overflow-hidden">
+    <div class="px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+      <h3 class="font-semibold text-sm">Search volume by practice area and city <span class="text-ink-400 font-normal">(click a column to sort)</span></h3>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs" id="vol-table"></table>
+    </div>
+  </div>
+</section>
+
+<!-- MAPS -->
+<section id="maps" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+  <h2 class="text-2xl font-bold tracking-tight">Map presence: invisible across most of the metro</h2>
+  <p class="text-sm text-ink-600 mt-1 max-w-3xl">Live Google Maps results for six core searches at nine points across metro Atlanta. Each cell shows Flanagan's rank at that point, or a blank if the firm does not appear in the top 20.</p>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5" id="maps-tiles"></div>
+  <div class="bg-white rounded-xl border border-slate-200 shadow-sm mt-5 overflow-hidden">
+    <div class="px-5 py-3 border-b border-slate-200"><h3 class="font-semibold text-sm">Flanagan's Map rank by search and location</h3></div>
+    <div class="overflow-x-auto"><table class="w-full text-xs" id="heat-table"></table></div>
+    <div class="px-5 py-2 text-[11px] text-ink-500 flex gap-4 flex-wrap border-t border-slate-100">
+      <span class="inline-flex items-center gap-1"><span class="inline-block w-3 h-3 rounded" style="background:#10b981"></span>Top 3</span>
+      <span class="inline-flex items-center gap-1"><span class="inline-block w-3 h-3 rounded" style="background:#fde047"></span>4 to 10</span>
+      <span class="inline-flex items-center gap-1"><span class="inline-block w-3 h-3 rounded" style="background:#fed7aa"></span>11 to 20</span>
+      <span class="inline-flex items-center gap-1"><span class="inline-block w-3 h-3 rounded bg-slate-100 border border-slate-200"></span>Not in top 20</span>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITION -->
+<section id="competition" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+  <h2 class="text-2xl font-bold tracking-tight">Who owns the map instead</h2>
+  <p class="text-sm text-ink-600 mt-1 max-w-3xl">The firms that show up in the top three across the grid, with their Google rating and review counts. Flanagan is shown in context.</p>
+  <div class="bg-white rounded-xl border border-slate-200 shadow-sm mt-5 overflow-hidden">
+    <div class="overflow-x-auto"><table class="w-full text-xs" id="comp-table"></table></div>
+  </div>
+  <div class="bg-white rounded-xl border border-slate-200 shadow-sm mt-5 p-5" id="gbp-card"></div>
+</section>
+
+<!-- AI -->
+<section id="ai" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+  <h2 class="text-2xl font-bold tracking-tight">AI and chatbot visibility</h2>
+  <p class="text-sm text-ink-600 mt-1 max-w-3xl">Where Flanagan stands in Google AI Overviews and in the answers ChatGPT, Gemini, Perplexity, and Claude give to buyer questions.</p>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-5" id="ai-tiles"></div>
+  <div class="grid lg:grid-cols-2 gap-5 mt-5">
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+      <h3 class="font-semibold text-sm mb-3">Per-model: is Flanagan mentioned?</h3>
+      <div id="llm-body" class="text-sm text-ink-600"></div>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+      <h3 class="font-semibold text-sm mb-3">Who AI cites instead</h3>
+      <div id="ai-domains" class="text-xs"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SITE -->
+<section id="site" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+  <h2 class="text-2xl font-bold tracking-tight">Site, structure, and links</h2>
+  <div class="grid lg:grid-cols-2 gap-5 mt-5">
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+      <h3 class="font-semibold text-sm mb-3">Architecture</h3>
+      <div id="arch-body" class="text-sm text-ink-600 space-y-2"></div>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+      <h3 class="font-semibold text-sm mb-3">On-page issues found</h3>
+      <div id="onpage-body" class="text-sm text-ink-600"></div>
+    </div>
+  </div>
+  <div class="grid lg:grid-cols-2 gap-5 mt-5">
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+      <h3 class="font-semibold text-sm mb-3">Backlink profile</h3>
+      <div id="bl-body" class="text-sm text-ink-600"></div>
+    </div>
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+      <h3 class="font-semibold text-sm mb-3">What competitors rank for that Flanagan does not</h3>
+      <div id="gap-body" class="text-sm text-ink-600"></div>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITY -->
+<section id="opportunity" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+  <div class="rounded-2xl border border-slate-200 bg-gradient-to-br from-white via-white to-amber-50 shadow-sm p-6 sm:p-8">
+    <div class="text-[11px] font-bold uppercase tracking-widest text-accent-amber">Missed opportunity, in leads</div>
+    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1.5" id="opp-h2"></h2>
+    <p class="text-sm text-ink-600 mt-3 max-w-4xl" id="opp-lede"></p>
+    <div id="funnel" class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-6"></div>
+    <div class="overflow-x-auto mt-5"><table class="text-xs w-full max-w-2xl" id="opp-table"></table></div>
+    <p class="text-[11px] text-ink-500 mt-4 max-w-4xl" id="opp-method"></p>
+  </div>
+</section>
+
+<!-- STRATEGY -->
+<section id="strategy" class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+  <h2 class="text-2xl font-bold tracking-tight">Where the work goes</h2>
+  <p class="text-sm text-ink-600 mt-1 max-w-3xl">The priorities, in order of impact, based on everything above.</p>
+  <div id="strat-cards" class="grid md:grid-cols-2 gap-5 mt-5"></div>
+</section>
+
+<footer class="max-w-7xl mx-auto px-4 sm:px-6 py-10 text-xs text-ink-500">
+  <div class="border-t border-slate-200 pt-6">
+    <p class="font-semibold text-ink-600">Method and sources</p>
+    <p class="mt-2 max-w-4xl">All figures from live DataForSEO pulls on 2026-06-03: ranked keywords, Google Ads search volume, live Maps results across a nine-point metro grid, live search results with AI Overview detection, ChatGPT, Gemini, Perplexity and Claude responses, an on-page crawl, the Google Business Profile, and the backlink profile. No Google Analytics or Search Console access was available for this prospect, so traffic and lead figures are modeled from search volume and published benchmark rates, and are labeled as such. Lead estimates are directional, meant to size the opportunity, and should be validated with tracking once it is in place.</p>
+    <p class="mt-3" id="foot-meta"></p>
+  </div>
+</footer>
+
+<script id="data" type="application/json">{"meta": {"firm": "Flanagan Law, P.C.", "domain": "bflanlaw.com", "address": "5855 Sandy Springs Circle, Suite 300, Atlanta, GA 30328", "phone": "404-480-4474", "tagline": "Personal Injury Attorney in Atlanta", "prepared": "2026-06-03", "author": "Aleksandar Spasevski, HQDM Search Intelligence", "status": "Prospect, prepared for sales call"}, "kpis": [{"label": "Modeled Atlanta-area demand", "value": "~156K", "unit": "searches / month", "note": "~102K geo-explicit (city-named) plus ~53K modeled Atlanta share of national 'near me'."}, {"label": "Top-10 organic on commercial terms", "value": "0", "unit": "of 20 core queries", "note": "Flanagan is absent from page one for every 'Atlanta + service' search tested."}, {"label": "Top-3 Map cells", "value": "0", "unit": "of 52 grid points", "note": "Visible in ~7 points, all near the office. Ranked 114th by map quality."}, {"label": "AI Overview presence", "value": "15.0%", "unit": "of searches, cited in 0", "note": "AI answers are still rare here. First-mover opening for citations."}, {"label": "Referring domains", "value": "165", "unit": "but 629 broken backlinks", "note": "More broken links than live ones. Equity is leaking."}, {"label": "Modeled missed leads", "value": "~327", "unit": "per month (midpoint)", "note": "Modeled from demand and benchmark rates. Range and method shown below."}], "demand": {"services": [{"base": "personal injury", "label": "Personal Injury", "by_location": {"atlanta": 36200, "sandy springs": 780, "marietta": 2600, "roswell": 850, "alpharetta": 630, "decatur": 480, "dunwoody": 100, "smyrna": 240, "buckhead": 10, "johns creek": 340, "near me": 602000, "(broad)": 336000}, "metro_local_total": 644230, "broad_national": 336000, "avg_cpc": null, "max_cpc": 134.76}, {"base": "car accident", "label": "Car Accidents", "by_location": {"atlanta": 24200, "sandy springs": 90, "marietta": 910, "roswell": 640, "alpharetta": 1440, "decatur": 320, "dunwoody": 30, "smyrna": 180, "buckhead": 0, "johns creek": 30, "near me": 239000, "(broad)": 275000}, "metro_local_total": 266840, "broad_national": 275000, "avg_cpc": null, "max_cpc": 233.01}, {"base": "truck accident", "label": "Truck Accidents", "by_location": {"atlanta": 8800, "sandy springs": 20, "marietta": 410, "roswell": 20, "alpharetta": 30, "decatur": 70, "dunwoody": 20, "smyrna": 20, "buckhead": 0, "johns creek": 20, "near me": 148000, "(broad)": 181000}, "metro_local_total": 157410, "broad_national": 181000, "avg_cpc": null, "max_cpc": 591.95}, {"base": "motorcycle accident", "label": "Motorcycle Accidents", "by_location": {"atlanta": 8800, "sandy springs": 20, "marietta": 30, "roswell": 20, "alpharetta": 20, "decatur": 40, "dunwoody": 20, "smyrna": 20, "buckhead": 0, "johns creek": 20, "near me": 99000, "(broad)": 47900}, "metro_local_total": 107990, "broad_national": 47900, "avg_cpc": null, "max_cpc": null}, {"base": "medical malpractice", "label": "Medical Malpractice", "by_location": {"atlanta": 2400, "sandy springs": 0, "marietta": 420, "roswell": 0, "alpharetta": 20, "decatur": 10, "dunwoody": 0, "smyrna": 0, "buckhead": 0, "johns creek": 0, "near me": 66200, "(broad)": 74000}, "metro_local_total": 69050, "broad_national": 74000, "avg_cpc": null, "max_cpc": null}, {"base": "slip and fall", "label": "Slip & Fall", "by_location": {"atlanta": 2000, "sandy springs": 10, "marietta": 20, "roswell": 20, "alpharetta": 20, "decatur": 0, "dunwoody": 10, "smyrna": 0, "buckhead": 0, "johns creek": 0, "near me": 44400, "(broad)": 58600}, "metro_local_total": 46480, "broad_national": 58600, "avg_cpc": null, "max_cpc": 280.29}, {"base": "dog bite", "label": "Dog Bites", "by_location": {"atlanta": 780, "sandy springs": 0, "marietta": 220, "roswell": 0, "alpharetta": 20, "decatur": 0, "dunwoody": 0, "smyrna": 30, "buckhead": 0, "johns creek": 0, "near me": 29600, "(broad)": 30300}, "metro_local_total": 30650, "broad_national": 30300, "avg_cpc": null, "max_cpc": 371.39}, {"base": "wrongful death", "label": "Wrongful Death", "by_location": {"atlanta": 5800, "sandy springs": 20, "marietta": 20, "roswell": 20, "alpharetta": 10, "decatur": 10, "dunwoody": 20, "smyrna": 20, "buckhead": 0, "johns creek": 20, "near me": 16200, "(broad)": 40300}, "metro_local_total": 22140, "broad_national": 40300, "avg_cpc": null, "max_cpc": 159.63}, {"base": "premises liability", "label": "Premises Liability", "by_location": {"atlanta": 780, "sandy springs": 10, "marietta": 10, "roswell": 0, "alpharetta": 20, "decatur": 30, "dunwoody": 10, "smyrna": 10, "buckhead": 0, "johns creek": 0, "near me": 16200, "(broad)": 44400}, "metro_local_total": 17070, "broad_national": 44400, "avg_cpc": null, "max_cpc": null}, {"base": "pedestrian accident", "label": "Pedestrian Accidents", "by_location": {"atlanta": 340, "sandy springs": 0, "marietta": 10, "roswell": 10, "alpharetta": 20, "decatur": 50, "dunwoody": 0, "smyrna": 0, "buckhead": 0, "johns creek": 0, "near me": 11000, "(broad)": 36200}, "metro_local_total": 11430, "broad_national": 36200, "avg_cpc": null, "max_cpc": null}, {"base": "rideshare accident", "label": "Rideshare Accidents", "by_location": {"atlanta": 0, "sandy springs": 0, "marietta": 0, "roswell": 0, "alpharetta": 0, "decatur": 0, "dunwoody": 0, "smyrna": 10, "buckhead": 0, "johns creek": 0, "near me": 3200, "(broad)": 19800}, "metro_local_total": 3210, "broad_national": 19800, "avg_cpc": null, "max_cpc": null}, {"base": "brain injury", "label": "Brain Injury", "by_location": {"atlanta": 0, "sandy springs": 0, "marietta": 0, "roswell": 0, "alpharetta": 0, "decatur": 0, "dunwoody": 0, "smyrna": 0, "buckhead": 0, "johns creek": 0, "near me": 2990, "(broad)": 0}, "metro_local_total": 2990, "broad_national": 0, "avg_cpc": null, "max_cpc": null}, {"base": "catastrophic injury", "label": "Catastrophic Injury", "by_location": {"atlanta": 340, "sandy springs": 0, "marietta": 0, "roswell": 0, "alpharetta": 0, "decatur": 20, "dunwoody": 0, "smyrna": 0, "buckhead": 0, "johns creek": 0, "near me": 1320, "(broad)": 8800}, "metro_local_total": 1680, "broad_national": 8800, "avg_cpc": null, "max_cpc": null}, {"base": "bus accident", "label": "Bus Accidents", "by_location": {"atlanta": 40, "sandy springs": 0, "marietta": 0, "roswell": 0, "alpharetta": 0, "decatur": 0, "dunwoody": 0, "smyrna": 0, "buckhead": 0, "johns creek": 0, "near me": 1390, "(broad)": 13200}, "metro_local_total": 1430, "broad_national": 13200, "avg_cpc": null, "max_cpc": null}], "cities": ["atlanta", "sandy springs", "marietta", "roswell", "alpharetta", "decatur", "dunwoody", "smyrna", "buckhead", "johns creek"], "atlanta_total": 90480, "suburb_total": 11620, "city_total_all": 102100, "near_me_total": 1280500, "broad_total": 1165500, "national_pools": 2446000, "atl_share": 0.04174161896974653, "near_me_atl_modeled": 53450, "near_me_atl_floor": 24330, "broad_atl_modeled": 48650, "modeled_total_demand": 155550}, "rankings": {"total": 877, "buckets": {"pos_1_10": 46, "pos_11_20": 85, "pos_21_50": 376, "pos_51_plus": 370}, "junk": [{"keyword": "crotch rocket", "rank": 14, "volume": 40500}, {"keyword": "motorcycle crotch rocket", "rank": 15, "volume": 8100}, {"keyword": "crotch rocket motorcycle", "rank": 16, "volume": 8100}, {"keyword": "definition of road rage", "rank": 19, "volume": 1900}, {"keyword": "lyndall", "rank": 13, "volume": 1900}, {"keyword": "without prejudice vs with prejudice", "rank": 18, "volume": 1900}, {"keyword": "what is bobtailing", "rank": 14, "volume": 1600}, {"keyword": "best and flanagan attorneys", "rank": 14, "volume": 880}]}, "maps": {"client": {"avg_rank": 12.0, "top3_cells": 0, "total_cells": 52, "market_rank_by_quality": 114}, "per_coordinate": {"sandy_springs_hq": {"cells_present": 5, "avg_rank": 10.4, "top3": 0, "top10": 3, "top20": 5}, "downtown_atlanta": {"cells_present": 0, "avg_rank": null, "top3": 0, "top10": 0, "top20": 0}, "buckhead": {"cells_present": 0, "avg_rank": null, "top3": 0, "top10": 0, "top20": 0}, "marietta": {"cells_present": 0, "avg_rank": null, "top3": 0, "top10": 0, "top20": 0}, "roswell": {"cells_present": 0, "avg_rank": null, "top3": 0, "top10": 0, "top20": 0}, "alpharetta": {"cells_present": 0, "avg_rank": null, "top3": 0, "top10": 0, "top20": 0}, "decatur": {"cells_present": 0, "avg_rank": null, "top3": 0, "top10": 0, "top20": 0}, "dunwoody": {"cells_present": 1, "avg_rank": 20.0, "top3": 0, "top10": 0, "top20": 1}, "east_point_south": {"cells_present": 0, "avg_rank": null, "top3": 0, "top10": 0, "top20": 0}}, "per_keyword": {"personal injury lawyer": {"cells_present": 1, "avg_rank": 13.0, "top3": 0, "top10": 0, "top20": 1}, "car accident lawyer": {"cells_present": 1, "avg_rank": 10.0, "top3": 0, "top10": 1, "top20": 1}, "truck accident lawyer": {"cells_present": 1, "avg_rank": 10.0, "top3": 0, "top10": 1, "top20": 1}, "wrongful death lawyer": {"cells_present": 0, "avg_rank": null, "top3": 0, "top10": 0, "top20": 0}, "motorcycle accident lawyer": {"cells_present": 1, "avg_rank": 11.0, "top3": 0, "top10": 0, "top20": 1}, "slip and fall lawyer": {"cells_present": 2, "avg_rank": 14.0, "top3": 0, "top10": 1, "top20": 2}}, "leaderboard": [{"name": "Accident Professionals", "domain": "accidentprofessionals.com", "rating": 5.0, "reviews": 104.0, "cells": 10, "top3": 6, "avg_rank": 2.7, "is_client": false}, {"name": "The Balams Firm", "domain": "www.balamslaw.com", "rating": 4.9, "reviews": 211.0, "cells": 10, "top3": 5, "avg_rank": 8.3, "is_client": false}, {"name": "Henningsen Injury Attorneys, P.C., Atlanta PI Attorney", "domain": "atlantapiattorney.com", "rating": 4.9, "reviews": 381.0, "cells": 10, "top3": 5, "avg_rank": 6.9, "is_client": false}, {"name": "Morgan & Morgan", "domain": "www.forthepeople.com", "rating": 4.6, "reviews": 1187.0, "cells": 8, "top3": 5, "avg_rank": 7.0, "is_client": false}, {"name": "Shiver Hamilton Campbell", "domain": "www.shiverhamilton.com", "rating": 5.0, "reviews": 141.0, "cells": 5, "top3": 5, "avg_rank": 1.0, "is_client": false}, {"name": "The Kalka Law Group - Personal Injury & Car Accident Attorneys", "domain": "www.kalkalaw.com", "rating": 5.0, "reviews": 242.0, "cells": 5, "top3": 5, "avg_rank": 1.2, "is_client": false}, {"name": "Morgan & Morgan", "domain": "www.forthepeople.com", "rating": 4.6, "reviews": 12454.0, "cells": 5, "top3": 5, "avg_rank": 2.0, "is_client": false}, {"name": "Merritt & Merritt Law Firm", "domain": "www.merrittandmerritt.com", "rating": 4.8, "reviews": 395.0, "cells": 5, "top3": 5, "avg_rank": 1.0, "is_client": false}, {"name": "Nick Schnyder Law Firm, LLC", "domain": "www.schnyderlawfirm.com", "rating": 4.8, "reviews": 523.0, "cells": 5, "top3": 5, "avg_rank": 2.6, "is_client": false}, {"name": "Monge & Associates Injury and Accident Attorneys - Atlanta", "domain": "www.becauseyouwanttowin.com", "rating": 4.8, "reviews": 3370.0, "cells": 13, "top3": 4, "avg_rank": 8.2, "is_client": false}, {"name": "Sweet James Accident Attorneys", "domain": "sweetjames.com", "rating": 4.9, "reviews": 283.0, "cells": 5, "top3": 4, "avg_rank": 2.2, "is_client": false}, {"name": "McCormick Law Firm", "domain": "www.theinjuryattorney.law", "rating": 4.7, "reviews": 177.0, "cells": 5, "top3": 4, "avg_rank": 2.0, "is_client": false}, {"name": "The Graham Firm", "domain": "grahamlawga.com", "rating": 4.7, "reviews": 95.0, "cells": 5, "top3": 4, "avg_rank": 2.8, "is_client": false}, {"name": "Murphy Law Georgia's Car Accident Lawyer", "domain": "murphylawyer.com", "rating": 4.8, "reviews": 65.0, "cells": 5, "top3": 4, "avg_rank": 3.8, "is_client": false}, {"name": "Kelleher Law", "domain": "www.jimforjustice.com", "rating": 5.0, "reviews": 11.0, "cells": 5, "top3": 4, "avg_rank": 2.4, "is_client": false}, {"name": "Monge & Associates Injury and Accident Attorneys", "domain": "www.becauseyouwanttowin.com", "rating": 5.0, "reviews": 350.0, "cells": 5, "top3": 4, "avg_rank": 3.2, "is_client": false}, {"name": "Flanagan Law, P.C.", "domain": "www.bflanlaw.com", "rating": 5.0, "reviews": 201.0, "cells": 6, "top3": 0, "avg_rank": 12.0, "is_client": true}], "heat": {"personal injury lawyer": {"sandy_springs_hq": 13}, "car accident lawyer": {"sandy_springs_hq": 10}, "truck accident lawyer": {"sandy_springs_hq": 10}, "motorcycle accident lawyer": {"sandy_springs_hq": 11}, "slip and fall lawyer": {"sandy_springs_hq": 8, "dunwoody": 20}}, "coord_order": ["sandy_springs_hq", "downtown_atlanta", "buckhead", "marietta", "roswell", "alpharetta", "decatur", "dunwoody", "east_point_south"], "kw_order": ["personal injury lawyer", "car accident lawyer", "truck accident lawyer", "wrongful death lawyer", "motorcycle accident lawyer", "slip and fall lawyer"]}, "serp": {"queries": 20, "local_pack": 20, "aio_count": 3, "aio_pct": 15.0, "client_top10": 0, "aio_domains": [{"domain": "www.google.com", "citations": 29}, {"domain": "www.lawzagoria.com", "citations": 2}, {"domain": "attorneys.superlawyers.com", "citations": 1}, {"domain": "www.stonelaw.com", "citations": 1}, {"domain": "www.hastypope.com", "citations": 1}, {"domain": "www.cochranfirm.com", "citations": 1}, {"domain": "topdoglaw.com", "citations": 1}, {"domain": "dixonfirm.com", "citations": 1}, {"domain": "www.lawyersatlanta.com", "citations": 1}, {"domain": "thegeorgiadogbitelawyer.com", "citations": 1}]}, "llm": {"schema_version": 1, "client": "flanaganlaw", "source": "llm_visibility", "generated_at": "2026-06-03T10:54:25.208090Z", "target": "bflanlaw.com", "prompts_tested": 12, "models": ["chatgpt", "gemini", "perplexity", "claude"], "by_model": {"chatgpt": {"cited_prompts": 0, "mentioned_prompts": 0}, "gemini": {"cited_prompts": 0, "mentioned_prompts": 0}, "perplexity": {"cited_prompts": 0, "mentioned_prompts": 0}, "claude": {"cited_prompts": 0, "mentioned_prompts": 0}}, "client_cited_any_pct": 0.0, "top_cited_domains": [{"domain": "google.com", "citations": 32}, {"domain": "attorneys.superlawyers.com", "citations": 9}, {"domain": "goldsteinhayeslaw.com", "citations": 9}, {"domain": "smstrial.com", "citations": 9}, {"domain": "tobininjurylaw.com", "citations": 7}, {"domain": "garymartinhays.com", "citations": 7}, {"domain": "johnfoy.com", "citations": 6}, {"domain": "cochranfirm.com", "citations": 6}, {"domain": "thewilsonpc.com", "citations": 5}, {"domain": "rafilawfirm.com", "citations": 5}, {"domain": "justia.com", "citations": 5}, {"domain": "finchmccranie.com", "citations": 5}], "per_prompt": [{"prompt": "Who are the best personal injury lawyers in Atlanta?", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "I was in a car accident in Atlanta, what law firm should I call?", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "Best truck accident attorney in Atlanta GA", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "Top wrongful death lawyers in Atlanta", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "Recommend a motorcycle accident lawyer in Atlanta", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "Who should I hire for a slip and fall case in Atlanta?", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "Best medical malpractice attorney in Atlanta", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "Highly rated personal injury law firm near Sandy Springs Georgia", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "I need a catastrophic injury lawyer in Atlanta, who is good?", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "What Atlanta personal injury law firm has the best case results?", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "Atlanta car accident lawyer with free consultation", "models_citing_client": [], "models_mentioning_client": []}, {"prompt": "Best rated injury attorney in Atlanta Georgia", "models_citing_client": [], "models_mentioning_client": []}]}, "architecture": {"pages": 27, "posts": 125, "practice_pages": 12, "location_pages": 0, "blog_last": "2025-03-05", "onpage": {"schema_version": 1, "client": "flanaganlaw", "source": "onpage", "generated_at": "2026-06-03T10:47:09.167339Z", "target": "bflanlaw.com", "pages_audited": 24, "issues": {"missing_h1": 0, "missing_title": 0, "missing_meta_description": 0, "thin_pages_lt_300w": 2, "non_200": 0, "no_schema": 24}, "avg_onpage_score": 93.2, "pages": [{"url": "https://bflanlaw.com/", "status_code": 200, "has_h1": true, "title_length": 60, "word_count": 1658, "has_schema": false}, {"url": "https://bflanlaw.com/about/", "status_code": 200, "has_h1": true, "title_length": 53, "word_count": 835, "has_schema": false}, {"url": "https://bflanlaw.com/our-team/", "status_code": 200, "has_h1": true, "title_length": 62, "word_count": 547, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/", "status_code": 200, "has_h1": true, "title_length": 63, "word_count": 777, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/car-accident/", "status_code": 200, "has_h1": true, "title_length": 51, "word_count": 906, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/truck-accidents/", "status_code": 200, "has_h1": true, "title_length": 63, "word_count": 878, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/bus-accident-lawyer/", "status_code": 200, "has_h1": true, "title_length": 52, "word_count": 580, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/premises-liability/", "status_code": 200, "has_h1": true, "title_length": 66, "word_count": 859, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/premises-liability/", "status_code": 200, "has_h1": true, "title_length": 66, "word_count": 859, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/wrongful-death/", "status_code": 200, "has_h1": true, "title_length": 49, "word_count": 787, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/motorcycle-accident/", "status_code": 200, "has_h1": true, "title_length": 51, "word_count": 718, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/dog-bites/", "status_code": 200, "has_h1": true, "title_length": 62, "word_count": 551, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/rideshare-accidents/", "status_code": 200, "has_h1": true, "title_length": 51, "word_count": 776, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/catastrophic-injury-lawyer/", "status_code": 200, "has_h1": true, "title_length": 49, "word_count": 817, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/amputation-injury-lawyer/", "status_code": 200, "has_h1": true, "title_length": 42, "word_count": 752, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-personal-injury-practice-areas/electrocution-accident-lawyer/", "status_code": 200, "has_h1": true, "title_length": 52, "word_count": 595, "has_schema": false}, {"url": "https://bflanlaw.com/atlanta-injury-attorney-results/", "status_code": 200, "has_h1": true, "title_length": 64, "word_count": 1075, "has_schema": false}, {"url": "https://bflanlaw.com/contact-us/", "status_code": 200, "has_h1": true, "title_length": 63, "word_count": 299, "has_schema": false}, {"url": "https://bflanlaw.com/faq/", "status_code": 200, "has_h1": true, "title_length": 18, "word_count": 1106, "has_schema": false}, {"url": "https://bflanlaw.com/georgia-personal-injury-consultation/", "status_code": 200, "has_h1": true, "title_length": 59, "word_count": 121, "has_schema": false}, {"url": "https://bflanlaw.com/blog/", "status_code": 200, "has_h1": true, "title_length": 19, "word_count": 314, "has_schema": false}, {"url": "https://bflanlaw.com/blog/what-does-a-truck-accident-lawyer-do/", "status_code": 200, "has_h1": true, "title_length": 58, "word_count": 934, "has_schema": false}, {"url": "https://bflanlaw.com/blog/how-is-fault-determined-in-a-car-accident/", "status_code": 200, "has_h1": true, "title_length": 55, "word_count": 628, "has_schema": false}, {"url": "https://bflanlaw.com/blog/filing-a-brain-injury-claim/", "status_code": 200, "has_h1": true, "title_length": 48, "word_count": 621, "has_schema": false}]}}, "backlinks": {"schema_version": 1, "client": "flanaganlaw", "source": "backlinks", "generated_at": "2026-06-03T10:36:19.033399Z", "target": "bflanlaw.com", "summary": {"target": "bflanlaw.com", "backlinks": 571, "referring_domains": 165, "referring_main_domains": 160, "referring_pages": 564, "broken_backlinks": 629, "referring_domains_nofollow": 35, "backlinks_spam_score": 6, "rank": 195}, "toxicity": {"toxic_spam_threshold": 60, "suspect_spam_threshold": 30, "toxic_referring_domains": 18, "suspect_referring_domains": 20, "clean_earned_baseline": 122, "disavow_candidate_count": 18}, "anchor_profile": {"branded_backlinks": 91, "naked_url_backlinks": 0, "generic_backlinks": 24, "other_text_backlinks": 447, "empty_backlinks": 9, "total_anchor_backlinks": 571, "branded_pct": 15.9, "top_anchors": [{"anchor": "View Website", "backlinks": 356}, {"anchor": "bflanlaw.com", "backlinks": 53}, {"anchor": "Visit Website", "backlinks": 14}, {"anchor": null, "backlinks": 9}, {"anchor": "Website", "backlinks": 9}, {"anchor": "personal injury attorney in Atlanta", "backlinks": 6}, {"anchor": "reputable personal injury attorney in Atlanta", "backlinks": 6}, {"anchor": "https://www.bflanlaw.com", "backlinks": 5}, {"anchor": "experienced wrongful death attorney in Atlanta", "backlinks": 4}, {"anchor": "https://bflanlaw.com/", "backlinks": 4}, {"anchor": "injury attorney in Atlanta", "backlinks": 4}, {"anchor": "experienced personal injury attorney in Atlanta", "backlinks": 4}, {"anchor": "https://bflanlaw.com/our-team/morgan-lyndall-georgia-attorney/", "backlinks": 4}, {"anchor": "Flanagan Law", "backlinks": 3}, {"anchor": "experienced rideshare accident lawyer in Atlanta", "backlinks": 3}]}, "disavow_candidates_preview": ["australianwebdirectory.pro", "australianwebdirectory.shop", "belonnanotservice.ga", "booksreadr.org", "browseallexpireddomains.us", "getwebsiteworth.com", "globalecommerce.org", "great-choice-for-pbn-domains.co.uk", "mundotecnologia.info", "musweb.org", "rankvanceseo.info", "read.org.in", "runningwebsites.net", "sergechel.info", "simplewebdirectory.com", "thebestbacklinksavailable.click", "what-happens-next.xyz", "wheretobuybest.link"]}, "gbp": {"schema_version": 1, "client": "flanaganlaw", "source": "gbp", "generated_at": "2026-06-03T10:50:07.709060Z", "business": "Flanagan Law", "profile": {"is_claimed": true, "category": "Law firm", "additional_categories": ["Attorney", "Personal injury attorney", "Trial attorney"], "total_photos": 23, "questions_count": null, "has_description": true, "has_hours": false, "has_attributes": true}, "completeness_pct": 86.0, "completeness_checks": {"claimed": true, "description": true, "category": true, "additional_categories": true, "hours": false, "photos": true, "attributes": true}, "rating": {"value": 5, "votes": 201}, "reviews": {"pulled": 100, "avg_rating": 4.96, "owner_response_rate_pct": 0.0, "recent_90d": 6}}, "gap": {"schema_version": 1, "client": "flanaganlaw", "source": "competitor_gap", "generated_at": "2026-06-03T10:50:13.574651Z", "target": "bflanlaw.com", "competitors": ["johnfoy.com", "hammerslawfirm.com", "kainelaw.com"], "gap_keywords_found": 900, "top_gap_keywords": [{"keyword": "crashing a car", "volume": 49500, "competitor": "hammerslawfirm.com", "competitor_position": null}, {"keyword": "crashing a car", "volume": 49500, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "crotch rocket", "volume": 40500, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "crotch rocket", "volume": 40500, "competitor": "hammerslawfirm.com", "competitor_position": null}, {"keyword": "crotch rocket", "volume": 40500, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismissed with prejudice", "volume": 33100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "dismissal with prejudice", "volume": 33100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "prejudice dismissal", "volume": 33100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "dismissal without prejudice", "volume": 33100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "dismiss with prejudice", "volume": 33100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismissed with prejudice", "volume": 33100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismissed without prejudice", "volume": 33100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismissal without prejudice", "volume": 33100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismissal with prejudice", "volume": 33100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismiss with prejudice", "volume": 33100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "dismissed without prejudice", "volume": 33100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "prejudice dismissal", "volume": 33100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "what does dismissed with prejudice mean", "volume": 9900, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "what does dismissed without prejudice mean", "volume": 9900, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "what does it mean to dismiss without prejudice", "volume": 9900, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "what does dismissed with prejudice mean", "volume": 9900, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "what does dismissed without prejudice mean", "volume": 9900, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "what does dismiss without prejudice mean", "volume": 9900, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "what does it mean to dismiss without prejudice", "volume": 9900, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "what does dismiss without prejudice mean", "volume": 9900, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "dismiss without prejudice meaning", "volume": 8100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "crotch rocket motorcycle", "volume": 8100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "dismiss without prejudice definition", "volume": 8100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "motorcycle crotch rocket", "volume": 8100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "dismissed with prejudice meaning", "volume": 8100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "dismissed without prejudice meaning", "volume": 8100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "dismissed with prejudice mean", "volume": 8100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "dismissed with prejudice meaning", "volume": 8100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismissed with prejudice mean", "volume": 8100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismiss without prejudice meaning", "volume": 8100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "crotch rocket motorcycle", "volume": 8100, "competitor": "hammerslawfirm.com", "competitor_position": null}, {"keyword": "motorcycle crotch rocket", "volume": 8100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "motorcycle crotch rocket", "volume": 8100, "competitor": "hammerslawfirm.com", "competitor_position": null}, {"keyword": "crotch rocket motorcycle", "volume": 8100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismiss with prejudice meaning", "volume": 8100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismiss without prejudice definition", "volume": 8100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismissed without prejudice meaning", "volume": 8100, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "dismiss with prejudice meaning", "volume": 8100, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "with prejudice meaning", "volume": 6600, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "definition of with prejudice", "volume": 6600, "competitor": "johnfoy.com", "competitor_position": null}, {"keyword": "definition of with prejudice", "volume": 6600, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "with prejudice meaning", "volume": 6600, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "total loss auto", "volume": 5400, "competitor": "kainelaw.com", "competitor_position": null}, {"keyword": "total loss auto", "volume": 5400, "competitor": "hammerslawfirm.com", "competitor_position": null}, {"keyword": "total loss auto", "volume": 5400, "competitor": "johnfoy.com", "competitor_position": null}]}, "leadmodel": {"lead_base": 155550, "geo_explicit": 102100, "near_me_atl_modeled": 53450, "scenarios": [{"name": "Conservative", "capture": 0.04, "lead_rate": 0.03, "clicks": 6222, "leads": 187}, {"name": "Midpoint", "capture": 0.06, "lead_rate": 0.035, "clicks": 9333, "leads": 327}, {"name": "Upside", "capture": 0.09, "lead_rate": 0.05, "clicks": 14000, "leads": 700}], "pop_share": 0.019, "atl_share": 0.04174161896974653, "near_me_atl_floor": 24330}, "strategy": [{"tag": "Biggest lever", "title": "Own the Atlanta map, not just the block around the office", "why": "Every one of the 20 core commercial searches shows a Map pack, but Flanagan sits in only about 7 of 52 grid points, all clustered near the Sandy Springs office, and ranks 114th by map quality. The whole metro (Downtown, Buckhead, Marietta, Roswell, Alpharetta, Decatur) is invisible.", "actions": ["Build city and area landing pages (there are zero today): Atlanta neighborhoods plus Marietta, Roswell, Alpharetta, Decatur, Dunwoody, Sandy Springs.", "Optimize and actively manage the Google Business Profile (categories, services, photos, posts, Q&A).", "Build local citations and consistent name, address, phone across directories.", "Steady review generation to close the gap with firms going 5-for-5 in the top three."]}, {"tag": "Quick traction", "title": "Make the money pages rank, not the blog trivia", "why": "Flanagan ranks in the top 10 for none of the 20 commercial 'Atlanta + service' searches, yet ranks page-one for trivia like 'crotch rocket' (40,500 a month) and 'deadhead trucking'. Visibility exists, it is just pointed at the wrong queries.", "actions": ["Rewrite and expand the 12 practice-area pages to target '{service} lawyer atlanta' and the attorney variants.", "Add service pages that are missing entirely (pedestrian, rideshare, Uber, brain injury).", "Re-point internal links from blog posts into the practice-area and city pages.", "Strengthen titles, headings, and schema on the commercial pages."]}, {"tag": "Foundation", "title": "Realign the content base to buyer intent", "why": "There are 125 blog posts but the blog has not been touched since March 2025, and most posts rank for informational terms that do not hire a lawyer. The content engine stalled.", "actions": ["Audit the 125 posts: refresh the ones with commercial pull, prune or consolidate the trivia.", "Restart a publishing rhythm focused on Atlanta cases, injuries, and questions buyers actually ask.", "Add FAQ and result content that supports the practice-area and city pages."]}, {"tag": "First-mover", "title": "Get picked by AI search while the field is still open", "why": "AI Overviews show on only 15% of these searches today and Flanagan is cited in none. ChatGPT and Gemini are not recommending the firm. The window to be the cited Atlanta source is open now and closing.", "actions": ["Add structured data (Attorney, LegalService, FAQ, Review) so machines can read the firm.", "Earn presence on the sources LLMs lean on (Justia, Avvo, local press, strong directories).", "Publish clear, well-structured answer content that AI engines can quote."]}, {"tag": "Hygiene", "title": "Reclaim and clean the link profile", "why": "There are 629 broken backlinks (more than the live ones), 18 toxic spam domains, and an anchor profile dominated by directory 'View Website' links. Earned authority is thin.", "actions": ["Redirect the broken backlink targets to recover lost link equity.", "Disavow the 18 toxic domains.", "Earn editorial and local links (press, sponsorships, community) to build real authority."]}, {"tag": "P0 prerequisite", "title": "Turn on measurement before the work starts", "why": "There is no analytics or Search Console access today, so wins cannot be proven and the lead numbers here are modeled, not measured.", "actions": ["Install GA4 plus call and form tracking and connect Search Console.", "Baseline current calls and form fills so the lead model can be validated against reality."]}]}</script>
+<script>
+const DATA = JSON.parse(document.getElementById('data').textContent);
+const fmt = n => (n===null||n===undefined||Number.isNaN(n)) ? '-' : Number(n).toLocaleString();
+const pct = f => (+(Number(f)*100).toFixed(1)) + '%';
+const el = id => document.getElementById(id);
+
+// header / hero
+el('h-firm').textContent = DATA.meta.firm;
+el('h-date').textContent = DATA.meta.prepared;
+el('hero-status').textContent = DATA.meta.status;
+el('hero-firm').textContent = DATA.meta.firm;
+el('hero-tagline').textContent = DATA.meta.tagline;
+el('hero-domain').textContent = DATA.meta.domain;
+el('hero-addr').textContent = DATA.meta.address;
+el('hero-author').textContent = DATA.meta.author;
+el('foot-meta').textContent = 'Prepared by ' + DATA.meta.author + ' for ' + DATA.meta.firm + '. ' + DATA.meta.status + '.';
+
+// TL;DR
+const lm = DATA.leadmodel, sc = lm.scenarios;
+el('tldr-body').innerHTML =
+ 'Flanagan Law has a real website, a 5-star Google profile, and a backlink base, but its search visibility is pointed at the wrong things. It ranks page-one for none of the 20 core "Atlanta + service" searches, sits in the top three on the map at none of 52 grid points, and is not named by Google AI Overviews or the chatbots. Meanwhile the firm ranks for blog trivia like "crotch rocket" at 40,500 searches a month. About <strong>'+fmt(DATA.demand.city_total_all)+'</strong> local searches a month name an Atlanta-area city for these services, and the firm\'s revealed share of the much larger national "near me" pool adds roughly <strong>'+fmt(DATA.demand.near_me_atl_modeled)+'</strong> more, so Flanagan sits in front of a modeled <strong>~'+fmt(DATA.demand.modeled_total_demand)+'</strong> searches a month and captures almost none of the non-brand share. Closing that gap is a modeled <strong>~'+fmt(sc[0].leads)+' to ~'+fmt(sc[1].leads)+' leads a month</strong>, with more at full presence.';
+
+// KPI tiles
+el('kpi-grid').innerHTML = DATA.kpis.map(k => `
+  <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+    <div class="text-xs uppercase tracking-wider text-ink-500">${k.label}</div>
+    <div class="flex items-baseline gap-2 mt-1"><span class="text-3xl font-extrabold">${k.value}</span><span class="text-xs text-ink-500">${k.unit}</span></div>
+    <div class="text-xs text-ink-500 mt-2 leading-snug">${k.note}</div>
+  </div>`).join('');
+
+// DEMAND tiles
+const d = DATA.demand;
+el('d-local').textContent = fmt(d.city_total_all) + ' /mo';
+el('d-local-note').innerHTML = 'Atlanta ' + fmt(d.atlanta_total) + ' + suburbs ' + fmt(d.suburb_total) + '. City-named terms only.';
+el('d-nearme').textContent = fmt(d.near_me_total) + ' /mo';
+el('d-nearme-note').innerHTML = 'National pool. Atlanta\'s modeled share: ~' + fmt(d.near_me_atl_modeled) + '/mo.';
+el('d-total').textContent = fmt(d.modeled_total_demand) + ' /mo';
+el('d-total-note').innerHTML = 'Geo-explicit + modeled Atlanta near-me. The base for the lead model.';
+// max cpc across services
+let maxcpc = 0; DATA.demand.services.forEach(s => { if (s.max_cpc && s.max_cpc>maxcpc) maxcpc=s.max_cpc; });
+el('d-cpc').textContent = maxcpc ? ('$'+Number(maxcpc).toFixed(0)) : '-';
+// near-me method explainer
+el('nearme-method').innerHTML = '<b>How we weight "near me":</b> the national "near me" pool (~'+fmt(d.near_me_total)+'/mo) and broad pool (~'+fmt(d.broad_total)+'/mo) are US-wide. Atlanta\'s revealed share of that national demand is its geo-explicit volume divided by the national pools: '+fmt(d.city_total_all)+' / '+fmt(d.national_pools)+' = <b>'+pct(d.atl_share)+'</b>. Applied to the "near me" pool, that models <b>~'+fmt(d.near_me_atl_modeled)+'/mo</b> of Atlanta near-me demand (vs ~'+fmt(d.near_me_atl_floor)+'/mo at the firm\'s ~1.9% population share, the conservative floor). We add the revealed-share figure to the geo-explicit total and leave the broad pool (a further ~'+fmt(d.broad_atl_modeled)+'/mo at the same share) as untapped upside.';
+
+// DEMAND chart (top services by Atlanta-area local demand)
+const svc = [...DATA.demand.services].map(s=>{
+  const local = DATA.demand.cities.reduce((a,c)=>a+(s.by_location[c]||0),0);
+  return {label:s.label, local};
+}).sort((a,b)=>b.local-a.local).slice(0,10);
+new Chart(el('demand-chart'), {
+  type:'bar',
+  data:{ labels:svc.map(s=>s.label),
+    datasets:[{label:'Atlanta-area searches / month', data:svc.map(s=>s.local), backgroundColor:'#1d5b8a'}]},
+  options:{ indexAxis:'y', plugins:{legend:{display:false}}, scales:{x:{ticks:{callback:v=>v.toLocaleString()}}}, maintainAspectRatio:false }
+});
+
+// VOLUME TABLE
+(function(){
+  const cities = d.cities;
+  const cols = cities.concat(['near me','(broad)']);
+  const head = ['Practice area'].concat(cities.map(c=>c.replace(/\b\w/g,m=>m.toUpperCase())))
+        .concat(['Near me*','Broad*','Local total']);
+  let rows = DATA.demand.services.map(s=>{
+    const local = cities.reduce((a,c)=>a+(s.by_location[c]||0),0);
+    return {label:s.label, vals:cols.map(c=>s.by_location[c]||0), local};
+  });
+  const maxLocal = Math.max(...rows.map(r=>r.local),1);
+  function render(sortIdx, dir){
+    if(sortIdx!==undefined){
+      rows.sort((a,b)=>{
+        let av,bv;
+        if(sortIdx===0){av=a.label;bv=b.label;return dir*(''+av).localeCompare(bv);}
+        if(sortIdx===head.length-1){av=a.local;bv=b.local;}
+        else {av=a.vals[sortIdx-1];bv=b.vals[sortIdx-1];}
+        return dir*(av-bv);
+      });
+    }
+    const th = head.map((h,i)=>{
+      const cls = i===0?'sticky-col text-left':'text-right';
+      return `<th class="sortable ${cls} px-3 py-2 font-semibold text-ink-600 border-b border-slate-200" data-i="${i}">${h}</th>`;
+    }).join('');
+    const body = rows.map(r=>{
+      const cells = r.vals.map((v,i)=>{
+        const isNat = i>=cities.length;
+        const bg = isNat ? '' : `background:rgba(29,91,138,${(v/ (maxLocal||1) *0.9).toFixed(3)})`;
+        const col = (!isNat && v/ (maxLocal||1) > 0.5) ? 'color:#fff' : '';
+        return `<td class="px-3 py-1.5 text-right hcell ${isNat?'text-ink-400':''}" style="${bg};${col}">${v?fmt(v):'·'}</td>`;
+      }).join('');
+      return `<tr class="border-b border-slate-50"><td class="sticky-col px-3 py-1.5 font-medium">${r.label}</td>${cells}<td class="px-3 py-1.5 text-right font-bold hcell">${fmt(r.local)}</td></tr>`;
+    }).join('');
+    const totalRow = `<tr class="bg-slate-50 font-bold"><td class="sticky-col px-3 py-2">All practice areas</td>`+
+      cols.map(c=>`<td class="px-3 py-2 text-right hcell ${cols.indexOf(c)>=cities.length?'text-ink-400':''}">${fmt(DATA.demand.services.reduce((a,s)=>a+(s.by_location[c]||0),0))}</td>`).join('')+
+      `<td class="px-3 py-2 text-right hcell">${fmt(d.city_total_all)}</td></tr>`;
+    el('vol-table').innerHTML = `<thead><tr>${th}</tr></thead><tbody>${body}${totalRow}</tbody>`;
+    el('vol-table').querySelectorAll('th.sortable').forEach(t=>{
+      t.onclick=()=>{ const i=+t.dataset.i; render(i, (render._i===i&&render._d===-1)?1:-1); render._i=i; render._d=(render._i===i&&render._d===-1)?1:-1; };
+    });
+  }
+  render(head.length-1,-1);
+})();
+
+// MAPS tiles
+const mc = DATA.maps.client;
+el('maps-tiles').innerHTML = [
+  {l:'Top-3 map cells', v: (mc.top3_cells||0)+' / '+(mc.total_cells||52)},
+  {l:'Average rank where present', v: mc.avg_rank? mc.avg_rank : '-'},
+  {l:'Market rank by quality', v:'#'+(mc.market_rank_by_quality||'-')},
+  {l:'Metro points with any presence', v: presenceCount()+' / '+(DATA.maps.coord_order.length)}
+].map(t=>`<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4"><div class="text-xs uppercase tracking-wider text-ink-500">${t.l}</div><div class="text-2xl font-extrabold mt-1">${t.v}</div></div>`).join('');
+function presenceCount(){ const pc=DATA.maps.per_coordinate||{}; return Object.values(pc).filter(c=>c && c.cells_present>0).length; }
+
+// HEAT TABLE (keyword x coordinate, Flanagan rank)
+(function(){
+  const kws = DATA.maps.kw_order, coords = DATA.maps.coord_order, heat = DATA.maps.heat;
+  const label = c => c.replace(/_/g,' ').replace(/\b\w/g,m=>m.toUpperCase());
+  function cellColor(r){ if(r==null) return 'background:#f1f5f9'; if(r<=3) return 'background:#10b981;color:#fff'; if(r<=10) return 'background:#fde047'; if(r<=20) return 'background:#fed7aa'; return 'background:#f1f5f9'; }
+  const th = '<th class="sticky-col text-left px-3 py-2 font-semibold text-ink-600 border-b">Search</th>'+
+    coords.map(c=>`<th class="px-2 py-2 text-center font-semibold text-ink-600 border-b" style="font-size:10px">${label(c)}</th>`).join('');
+  const body = kws.map(kw=>{
+    const cells = coords.map(c=>{ const r=(heat[kw]||{})[c]; return `<td class="text-center px-2 py-1.5 hcell" style="${cellColor(r==null?null:r)}">${r==null?'':r}</td>`; }).join('');
+    return `<tr><td class="sticky-col px-3 py-1.5 font-medium">${kw}</td>${cells}</tr>`;
+  }).join('');
+  el('heat-table').innerHTML = `<thead><tr>${th}</tr></thead><tbody>${body}</tbody>`;
+})();
+
+// COMPETITOR TABLE
+(function(){
+  const lb = DATA.maps.leaderboard||[];
+  const head = ['Firm','Website','Rating','Reviews','Top-3 cells','Avg rank'];
+  const th = head.map((h,i)=>`<th class="${i<2?'text-left':'text-right'} px-3 py-2 font-semibold text-ink-600 border-b border-slate-200">${h}</th>`).join('');
+  const body = lb.map(r=>{
+    const hl = r.is_client ? 'background:#eff6ff;font-weight:700' : '';
+    const name = r.is_client ? (r.name+' (Flanagan)') : r.name;
+    return `<tr style="${hl}" class="border-b border-slate-50">
+      <td class="px-3 py-1.5">${name||'-'}</td>
+      <td class="px-3 py-1.5 text-ink-500 font-mono" style="font-size:11px">${r.domain||'-'}</td>
+      <td class="px-3 py-1.5 text-right hcell">${r.rating!=null?r.rating:'-'}</td>
+      <td class="px-3 py-1.5 text-right hcell">${r.reviews!=null?fmt(r.reviews):'-'}</td>
+      <td class="px-3 py-1.5 text-right hcell">${r.top3!=null?r.top3:'-'}</td>
+      <td class="px-3 py-1.5 text-right hcell">${r.avg_rank!=null?r.avg_rank:'-'}</td></tr>`;
+  }).join('');
+  el('comp-table').innerHTML = `<thead><tr>${th}</tr></thead><tbody>${body}</tbody>`;
+})();
+
+// GBP card
+(function(){
+  const g = DATA.gbp; if(!g){ el('gbp-card').style.display='none'; return; }
+  const r = g.rating||{}, rev = g.reviews||{}, p = g.profile||{};
+  el('gbp-card').innerHTML = `
+    <div class="text-[11px] font-bold uppercase tracking-widest text-brand-500">Flanagan's own Google profile</div>
+    <h3 class="font-bold text-lg mt-1">A strong reputation, trapped near the office</h3>
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+      ${[['Rating', (r.value!=null?r.value+'★':'-')],['Reviews', fmt(r.votes)],['Profile complete', (g.completeness_pct!=null?g.completeness_pct+'%':'-')],['Reviews last 90 days', fmt(rev.recent_90d)]]
+        .map(t=>`<div><div class="text-xs uppercase tracking-wider text-ink-500">${t[0]}</div><div class="text-2xl font-extrabold">${t[1]}</div></div>`).join('')}
+    </div>
+    <p class="text-sm text-ink-600 mt-4">Flanagan has a <b>${r.value}-star profile with ${fmt(r.votes)} reviews</b>, yet ranks 114th by map quality and shows up in the top three nowhere across the metro. The reputation is real, the reach is not. Two quick gaps stand out: the owner replies to <b>${rev.owner_response_rate_pct!=null?rev.owner_response_rate_pct+'%':'-'}</b> of reviews and the profile has <b>${p.has_hours?'hours set':'no hours set'}</b>. The bigger issue is that the website gives Google almost no local signal to connect that profile to searches beyond the office address.</p>`;
+})();
+
+// AI tiles
+const sp = DATA.serp;
+el('ai-tiles').innerHTML = [
+  {l:'AI Overview saturation', v:(sp.aio_pct!=null?sp.aio_pct+'%':'-'), n:(sp.aio_count||0)+' of '+(sp.queries||0)+' searches'},
+  {l:'Flanagan cited in AI Overviews', v:'0', n:'No appearances'},
+  {l:'Local pack present', v:(sp.local_pack||0)+' / '+(sp.queries||0), n:'Local intent is universal here'},
+  {l:'Flanagan in top-10 organic', v:(sp.client_top10||0)+' / '+(sp.queries||0), n:'Across the commercial queries'}
+].map(t=>`<div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4"><div class="text-xs uppercase tracking-wider text-ink-500">${t.l}</div><div class="text-2xl font-extrabold mt-1">${t.v}</div><div class="text-xs text-ink-500 mt-1">${t.n}</div></div>`).join('');
+
+// LLM body
+(function(){
+  if(!DATA.llm || !DATA.llm.by_model){ el('llm-body').innerHTML = '<div class="text-ink-400">LLM pull pending.</div>'; }
+  else {
+    const bm = DATA.llm.by_model, n = DATA.llm.prompts_tested||0;
+    const order=['chatgpt','gemini','perplexity','claude'];
+    const nice={chatgpt:'ChatGPT',gemini:'Gemini',perplexity:'Perplexity',claude:'Claude'};
+    el('llm-body').innerHTML = order.filter(m=>bm[m]).map(m=>{
+      const c=bm[m].cited_prompts||0, men=bm[m].mentioned_prompts||0;
+      const ok = (c||men)>0;
+      return `<div class="flex items-center justify-between py-2 border-b border-slate-100">
+        <span class="font-medium">${nice[m]}</span>
+        <span class="text-xs ${ok?'text-accent-green':'text-accent-red'} font-semibold">${ok?('mentioned in '+men+' of '+n):'not mentioned in any of '+n}</span></div>`;
+    }).join('') + `<div class="text-xs text-ink-500 mt-3">Cited (linked) in any model: ${DATA.llm.client_cited_any_pct!=null?DATA.llm.client_cited_any_pct+'% of prompts':'-'}.</div>`;
+  }
+})();
+
+// AI cited domains
+(function(){
+  const dom = (DATA.serp.aio_domains||[]).filter(x=>x.domain && !/google\.com/.test(x.domain)).slice(0,8);
+  const llmDom = (DATA.llm && DATA.llm.top_cited_domains)? DATA.llm.top_cited_domains.slice(0,8):[];
+  let h = '<div class="text-xs font-semibold text-ink-500 mb-1">In Google AI Overviews</div>';
+  h += dom.length? dom.map(x=>`<div class="flex justify-between py-1 border-b border-slate-50"><span class="font-mono" style="font-size:11px">${x.domain}</span><span class="text-ink-400">${x.citations}</span></div>`).join('') : '<div class="text-ink-400 text-xs">Few AI Overviews present.</div>';
+  if(llmDom.length){ h += '<div class="text-xs font-semibold text-ink-500 mt-3 mb-1">In chatbot answers</div>'+ llmDom.map(x=>`<div class="flex justify-between py-1 border-b border-slate-50"><span class="font-mono" style="font-size:11px">${x.domain}</span><span class="text-ink-400">${x.citations}</span></div>`).join(''); }
+  el('ai-domains').innerHTML = h;
+})();
+
+// ARCHITECTURE
+(function(){
+  const a = DATA.architecture;
+  el('arch-body').innerHTML = `
+    <div class="flex justify-between border-b border-slate-100 py-1.5"><span>Pages</span><b>${fmt(a.pages)}</b></div>
+    <div class="flex justify-between border-b border-slate-100 py-1.5"><span>Blog posts</span><b>${fmt(a.posts)}</b></div>
+    <div class="flex justify-between border-b border-slate-100 py-1.5"><span>Practice-area pages</span><b>${fmt(a.practice_pages)}</b></div>
+    <div class="flex justify-between border-b border-slate-100 py-1.5"><span>City / location pages</span><b class="text-accent-red">${fmt(a.location_pages)}</b></div>
+    <div class="flex justify-between py-1.5"><span>Blog last updated</span><b class="text-accent-red">${a.blog_last||'-'}</b></div>
+    <p class="text-xs text-ink-500 mt-2">A metro firm with no city pages and a blog that stopped in early 2025 is leaving the local and freshness signals on the table.</p>`;
+})();
+
+// ONPAGE
+(function(){
+  const o = DATA.architecture.onpage;
+  if(!o || !o.issues){ el('onpage-body').innerHTML='<div class="text-ink-400">On-page crawl pending.</div>'; return; }
+  const i=o.issues;
+  el('onpage-body').innerHTML = `
+    <div class="text-sm mb-2">Audited ${fmt(o.pages_audited)} key pages. Average on-page score: <b>${o.avg_onpage_score!=null?o.avg_onpage_score:'-'}</b>.</div>
+    ${[['Missing H1','missing_h1'],['Missing title','missing_title'],['Missing meta description','missing_meta_description'],['Thin (under 300 words)','thin_pages_lt_300w'],['Non-200 status','non_200'],['No schema markup','no_schema']]
+      .map(([lab,k])=>`<div class="flex justify-between border-b border-slate-100 py-1.5"><span>${lab}</span><b class="${i[k]>0?'text-accent-red':'text-accent-green'}">${i[k]}</b></div>`).join('')}`;
+})();
+
+// BACKLINKS
+(function(){
+  const b = DATA.backlinks; if(!b||!b.summary){ el('bl-body').innerHTML='<div class="text-ink-400">Backlinks pending.</div>'; return;}
+  const s=b.summary, t=b.toxicity||{}, ap=b.anchor_profile||{};
+  el('bl-body').innerHTML = `
+    <div class="flex justify-between border-b border-slate-100 py-1.5"><span>Referring domains</span><b>${fmt(s.referring_domains)}</b></div>
+    <div class="flex justify-between border-b border-slate-100 py-1.5"><span>Live backlinks</span><b>${fmt(s.backlinks)}</b></div>
+    <div class="flex justify-between border-b border-slate-100 py-1.5"><span>Broken backlinks</span><b class="text-accent-red">${fmt(s.broken_backlinks)}</b></div>
+    <div class="flex justify-between border-b border-slate-100 py-1.5"><span>Toxic domains to disavow</span><b class="text-accent-amber">${fmt(t.toxic_referring_domains)}</b></div>
+    <div class="flex justify-between py-1.5"><span>Branded anchors</span><b>${ap.branded_pct!=null?ap.branded_pct+'%':'-'}</b></div>
+    <p class="text-xs text-ink-500 mt-2">The profile is directory-heavy ("View Website" links) with more broken links than live ones. Reclaiming and earning real links is open ground.</p>`;
+})();
+
+// GAP
+(function(){
+  const g = DATA.gap; if(!g || !g.top_gap_keywords){ el('gap-body').innerHTML='<div class="text-ink-400">Content-gap pull pending.</div>'; return;}
+  const COMM=/lawyer|attorney|accident|injury|injuries|claim|settlement|compensation|sue|lawsuit|malpractice|negligence|wrongful|liability|fault/i;
+  const JUNK=/meaning|definition|define|what does|what is|vs |versus|crotch|deadhead|bobtail|jake brake|road rage/i;
+  const seen=new Set();
+  const top=g.top_gap_keywords.filter(k=>k.keyword&&COMM.test(k.keyword)&&!JUNK.test(k.keyword)&&!seen.has(k.keyword)&&(seen.add(k.keyword),true)).slice(0,10);
+  let h = `<div class="text-xs text-ink-500 mb-2">Versus ${ (g.competitors||[]).join(', ') }, ${fmt(g.gap_keywords_found)} keywords they rank for that Flanagan does not. The commercially relevant ones:</div>`;
+  h += top.length ? '<div class="space-y-1">'+top.map(k=>`<div class="flex justify-between border-b border-slate-50 py-1"><span class="truncate pr-2">${k.keyword}</span><span class="text-ink-400 hcell">${fmt(k.volume)}</span></div>`).join('')+'</div>' : '<div class="text-ink-400 text-xs">The shared gap is almost entirely informational.</div>';
+  h += '<p class="text-xs text-ink-500 mt-3">Most of the raw gap is high-volume trivia (legal definitions, vehicle terms). The competitors chase it too. The real edge is the local and commercial layer, not matching their informational content.</p>';
+  el('gap-body').innerHTML = h;
+})();
+
+// OPPORTUNITY funnel + table
+(function(){
+  el('opp-h2').innerHTML = 'A modeled ~'+fmt(sc[1].leads)+' qualified leads a month are on the table';
+  el('opp-lede').innerHTML = 'Flanagan captures almost none of the non-brand commercial demand today (zero page-one organic, zero top-three map). The model below takes the modeled total Atlanta-area demand (geo-explicit plus Atlanta\'s revealed share of national "near me") and applies benchmark click and contact rates. Every number is modeled and labeled, meant to size the prize, not to promise it.';
+  el('funnel').innerHTML = [
+    {l:'Modeled Atlanta demand', v:fmt(lm.lead_base)+' /mo', n:'Geo-explicit + modeled near-me share'},
+    {l:'Visits at competitive presence', v:'~'+fmt(sc[1].clicks)+' /mo', n:'Midpoint capture of '+pct(sc[1].capture)+' of demand'},
+    {l:'Leads (calls + forms)', v:'~'+fmt(sc[1].leads)+' /mo', n:'At a '+pct(sc[1].lead_rate)+' contact rate'}
+  ].map((f,i)=>`<div class="bg-white rounded-xl border border-slate-200 p-4 relative">
+      <div class="text-xs uppercase tracking-wider text-ink-500">${f.l}</div>
+      <div class="text-2xl font-extrabold mt-1">${f.v}</div>
+      <div class="text-xs text-ink-500 mt-1">${f.n}</div>
+      ${i<2?'<div class="hidden md:block absolute -right-3 top-1/2 -translate-y-1/2 text-ink-300 text-xl z-10">&rarr;</div>':''}</div>`).join('');
+  const th = '<thead><tr>'+['Scenario','Click capture of demand','Contact rate','Visits / mo','Leads / mo'].map((h,i)=>`<th class="${i?'text-right':'text-left'} px-3 py-2 font-semibold text-ink-600 border-b">${h}</th>`).join('')+'</tr></thead>';
+  const body = sc.map(s=>`<tr class="border-b border-slate-50"><td class="px-3 py-1.5 font-medium">${s.name}</td><td class="px-3 py-1.5 text-right hcell">${pct(s.capture)}</td><td class="px-3 py-1.5 text-right hcell">${pct(s.lead_rate)}</td><td class="px-3 py-1.5 text-right hcell">${fmt(s.clicks)}</td><td class="px-3 py-1.5 text-right font-bold hcell">${fmt(s.leads)}</td></tr>`).join('');
+  el('opp-table').innerHTML = th+'<tbody>'+body+'</tbody>';
+  el('opp-method').innerHTML = 'Method: demand is the modeled total Atlanta-area pool, the geo-explicit city-named volume ('+fmt(lm.geo_explicit)+'/mo) plus Atlanta\'s revealed share ('+pct(lm.atl_share)+') of the national "near me" pool (~'+fmt(lm.near_me_atl_modeled)+'/mo). Click capture and contact rate are published benchmark ranges for local-service search, not Flanagan-specific. The broad national pool is left out as further upside, and the conservative population-share floor for near-me would be ~'+fmt(lm.near_me_atl_floor)+'/mo. To convert leads to revenue, layer in the firm\'s signed-case rate and average case value.';
+})();
+
+// STRATEGY cards
+el('strat-cards').innerHTML = DATA.strategy.map(s=>`
+  <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+    <div class="text-[11px] font-bold uppercase tracking-widest text-brand-500">${s.tag}</div>
+    <h3 class="font-bold text-lg mt-1 leading-snug">${s.title}</h3>
+    <p class="text-sm text-ink-600 mt-2">${s.why}</p>
+    <ul class="mt-3 space-y-1.5">${s.actions.map(a=>`<li class="text-sm text-ink-700 flex gap-2"><span class="text-brand-500 mt-0.5">&bull;</span><span>${a}</span></li>`).join('')}</ul>
+  </div>`).join('');
+</script>
+</body>
+</html>

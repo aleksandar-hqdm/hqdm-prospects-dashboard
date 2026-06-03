@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow, noarchive"/>
+<title>HQDM Prospects Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-serif']},colors:{ink:{900:'#0b1220',800:'#111827',700:'#1f2937',600:'#374151',500:'#6b7280',400:'#9ca3af',300:'#d1d5db'},brand:{900:'#0b2545',700:'#13315c',500:'#1d5b8a',400:'#3b82f6',300:'#8ecae6',50:'#eff6ff',200:'#bfdbfe'}}}}}
+</script>
+</head>
+<body class="bg-slate-50 text-ink-800 font-sans antialiased">
+<section class="bg-gradient-to-br from-brand-900 via-brand-700 to-brand-500 text-white">
+  <div class="max-w-5xl mx-auto px-5 py-12">
+    <div class="text-xs font-semibold uppercase tracking-widest text-brand-300">HQDM Search Intelligence</div>
+    <h1 class="text-3xl sm:text-4xl font-extrabold mt-2">Prospects Dashboard</h1>
+    <p class="text-base text-white/85 mt-3 max-w-2xl">Pre-sale SEO opportunity analyses for prospects ahead of a sales call. Each prospect has a full research breakdown, a call guidance report for the rep, and a simple client-facing snapshot. Internal use and authorized prospect viewing only.</p>
+  </div>
+</section>
+<main class="max-w-5xl mx-auto px-5 py-10">
+  <h2 class="text-sm font-bold uppercase tracking-wider text-ink-500 mb-4">Prospects</h2>
+  <div class="grid sm:grid-cols-2 gap-5">
+
+    <!-- Flanagan Law -->
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="font-bold text-lg">Flanagan Law, P.C.</div>
+          <div class="text-xs text-ink-500 mt-0.5">Personal injury, Atlanta GA, bflanlaw.com</div>
+        </div>
+        <span class="text-[10px] font-semibold uppercase tracking-wider text-brand-500 bg-brand-50 border border-brand-200 rounded-full px-2 py-1">Sales call</span>
+      </div>
+      <p class="text-sm text-ink-600 mt-3">Strong 5-star profile but invisible across the metro: page-one for none of the 20 core searches, top-3 on the map nowhere, and named by zero AI assistants. A modeled ~327 leads a month opportunity.</p>
+      <div class="grid grid-cols-3 gap-2 mt-5">
+        <a href="prospects/flanagan-law/research.html" class="text-center text-xs font-semibold px-3 py-2 rounded-lg border border-brand-500 text-brand-700 hover:bg-brand-50 transition">Research</a>
+        <a href="prospects/flanagan-law/call-guidance.html" class="text-center text-xs font-semibold px-3 py-2 rounded-lg border border-brand-500 text-brand-700 hover:bg-brand-50 transition">Call Guidance</a>
+        <a href="prospects/flanagan-law/client.html" class="text-center text-xs font-semibold px-3 py-2 rounded-lg bg-brand-700 text-white hover:bg-brand-900 transition">Client View</a>
+      </div>
+      <div class="text-[11px] text-ink-400 mt-3 font-mono">Prepared 2026-06-03</div>
+    </div>
+
+  </div>
+  <p class="text-xs text-ink-400 mt-10">noindex, internal. To add a prospect: drop its research / call-guidance / client pages under prospects/&lt;slug&gt;/ and copy a card above.</p>
+</main>
+</body>
+</html>
