@@ -63,6 +63,12 @@ tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-seri
     </div>
   </div>
 
+  <div class="rounded-xl border border-slate-200 p-5">
+    <div class="text-base font-bold text-ink-800">What each area can add</div>
+    <p class="text-sm text-ink-500 mt-1 mb-3">The full-metro number is the sum of the nine areas we mapped. At competitive presence each contributes roughly the same, and Sandy Springs comes first because it is your home base. Larger areas like Downtown and Buckhead will run higher, smaller ones lower.</p>
+    <div id="c-areas" class="divide-y divide-slate-100"></div>
+  </div>
+
   <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="c-tiles"></div>
 
   <div class="rounded-xl border border-slate-200 p-5" id="c-gbp"></div>
@@ -107,7 +113,7 @@ const DATA=JSON.parse(document.getElementById('data').textContent);
 const fmt=n=>(n==null||Number.isNaN(n))?'-':Number(n).toLocaleString();
 const el=id=>document.getElementById(id);
 const m=DATA.meta,d=DATA.demand,sc=DATA.leadmodel.scenarios,g=DATA.gbp||{},mp=DATA.maps||{};
-const lab=s=>String(s).replace(/_/g,' ').replace(/\b\w/g,x=>x.toUpperCase());
+const lab=s=>String(s).replace(/_hq$/,'').replace(/_/g,' ').replace(/\b\w/g,x=>x.toUpperCase());
 const short=s=>{s=String(s||'').split(/ - |:|,/)[0].trim();return s.length>16?s.slice(0,14)+'...':s;};
 const col=r=>r==null?'background:#f1f5f9;color:#cbd5e1':r<=3?'background:#10b981;color:#fff':r<=10?'background:#fde047;color:#713f12':r<=20?'background:#fed7aa;color:#7c2d12':'background:#f1f5f9;color:#cbd5e1';
 
@@ -123,6 +129,16 @@ el('c-opp-poss').textContent='~'+fmt(sc[1].leads)+' / mo';
  el('c-opp-first').textContent='~'+fmt(ft)+' / mo';
  el('c-opp-firstbar').style.width=Math.max(4,Math.round(ft/ceil*100))+'%';
  el('c-opp-first-note').innerHTML='<b>First target: Sandy Springs.</b> Your home base, where you already show up on the map. Winning it is a modeled <b>~'+fmt(ft)+' leads a month</b>, your fastest and lowest-cost win. We then expand area by area toward the full-metro number.';
+})();
+
+// Per-area lead contribution
+(function(){
+ const coords=(DATA.maps&&DATA.maps.coord_order)||[], per=(DATA.leadmodel.first_target_leads)||0;
+ const areasEl=el('c-areas'); if(!areasEl) return;
+ if(!coords.length){const wrap=areasEl.closest('.rounded-xl'); if(wrap)wrap.style.display='none'; return;}
+ let h=coords.map((c,i)=>`<div class="flex items-center justify-between py-2"><span class="text-sm ${i===0?'font-bold text-brand-700':'text-ink-700'}">${lab(c)}${i===0?' <span class="text-[10px] uppercase tracking-wider bg-brand-50 text-brand-700 rounded px-1.5 py-0.5 ml-1">first target</span>':''}</span><span class="text-sm font-semibold">~${fmt(per)} / mo</span></div>`).join('');
+ h+=`<div class="flex items-center justify-between py-2 mt-1"><span class="text-sm font-bold">Full metro, all nine areas</span><span class="text-base font-extrabold">~${fmt(sc[1].leads)} / mo</span></div>`;
+ areasEl.innerHTML=h;
 })();
 
 // Your Google profile card
