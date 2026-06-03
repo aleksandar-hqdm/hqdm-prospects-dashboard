@@ -27,11 +27,13 @@ tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-seri
 </head>
 <body class="bg-white text-ink-800 font-sans antialiased">
 <section class="bg-gradient-to-br from-brand-900 to-brand-500 text-white">
-  <div class="max-w-5xl mx-auto px-5 py-10">
-    <img id="c-logo" alt="" class="w-16 h-16 rounded-full object-cover ring-2 ring-white/50 bg-white mb-4" style="display:none">
-    <div class="text-xs font-semibold uppercase tracking-widest text-brand-300" id="c-date"></div>
-    <h1 class="text-3xl font-extrabold mt-1" id="c-firm"></h1>
-    <p class="text-lg text-brand-300 mt-2">Where you stand in Atlanta search today</p>
+  <div class="max-w-5xl mx-auto px-5 py-10 flex items-center gap-4 sm:gap-6">
+    <img id="c-logo" alt="" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover ring-2 ring-white/50 bg-white flex-shrink-0" style="display:none">
+    <div>
+      <div class="text-xs font-semibold uppercase tracking-widest text-brand-300" id="c-date"></div>
+      <h1 class="text-3xl font-extrabold mt-1" id="c-firm"></h1>
+      <p class="text-lg text-brand-300 mt-2">Where you stand in Atlanta search today</p>
+    </div>
   </div>
 </section>
 <main class="max-w-5xl mx-auto px-5 py-8 space-y-8">
