@@ -50,12 +50,6 @@ tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-seri
     <div class="space-y-3" id="c-opp-bars"></div>
   </div>
 
-  <div class="rounded-xl border border-slate-200 p-5">
-    <div class="text-base font-bold text-ink-800">How the rollout adds up, area by area</div>
-    <p class="text-sm text-ink-500 mt-1 mb-3">We start with Sandy Springs, your home base, then expand area by area. Each adds leads in line with its size and search demand, and the running total climbs to the full-metro number.</p>
-    <div class="overflow-x-auto"><table class="kt" id="c-areas"></table></div>
-  </div>
-
   <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="c-tiles"></div>
 
   <div class="rounded-xl border border-slate-200 p-5" id="c-gbp"></div>
@@ -116,16 +110,6 @@ el('c-opp-sub').textContent='This is the ceiling: a modeled estimate once you ra
  const ph=(DATA.leadmodel.opp_phases)||[], ceil=sc[1].leads||1;
  const col=k=>k==='today'?'bg-white/30':k==='first'?'bg-accent-amber':k==='full'?'bg-accent-green':'bg-accent-teal';
  el('c-opp-bars').innerHTML=ph.map(p=>{const w=p.kind==='today'?3:Math.max(4,Math.round(p.cum/ceil*100));const val=p.kind==='today'?'almost none':('~'+fmt(p.cum)+' / mo');return `<div><div class="flex justify-between text-xs text-white/70 mb-1"><span>${p.label}</span><span>${val}</span></div><div class="bg-white/10 rounded-full h-5 overflow-hidden"><div class="${col(p.kind)} h-5 rounded-full" style="width:${w}%"></div></div></div>`;}).join('');
-})();
-
-// Per-area cumulative rollout (Sandy Springs first, then building to the full metro)
-(function(){
- const pa=(DATA.leadmodel.per_area)||[];
- const areasEl=el('c-areas'); if(!areasEl) return;
- if(!pa.length){const wrap=areasEl.closest('.rounded-xl'); if(wrap)wrap.style.display='none'; return;}
- let cum=0;
- const rows=pa.map((r,i)=>{cum+=r.leads; const last=i===pa.length-1; return `<tr style="${last?'font-weight:700;background:#f8fafc':''}"><td>${i+1}. <span class="${r.first?'font-bold text-brand-700':''}">${lab(r.area)}</span>${r.first?' <span class="text-[10px] uppercase tracking-wider bg-brand-50 text-brand-700 rounded px-1.5 py-0.5 ml-1">first target</span>':(last?' <span class="text-[10px] uppercase tracking-wider text-ink-400 ml-1">full metro</span>':'')}</td><td class="tr text-ink-400">+${fmt(r.leads)}</td><td class="tr">~${fmt(cum)} / mo</td></tr>`;}).join('');
- areasEl.innerHTML='<thead><tr><th>Add this area</th><th class="tr">Leads it adds</th><th class="tr">Running total</th></tr></thead><tbody>'+rows+'</tbody>';
 })();
 
 // Your Google profile card
