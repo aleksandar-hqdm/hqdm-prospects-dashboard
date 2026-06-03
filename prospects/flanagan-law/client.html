@@ -23,14 +23,32 @@ tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-seri
 <main class="max-w-3xl mx-auto px-5 py-8 space-y-7">
   <p class="text-xl leading-relaxed text-ink-800" id="c-diag"></p>
   <div class="grid grid-cols-2 gap-3" id="c-tiles"></div>
+
+  <div class="rounded-xl border border-slate-200 p-5">
+    <div class="text-base font-bold text-ink-800">Who shows up across Atlanta</div>
+    <p class="text-sm text-ink-500 mt-1 mb-4">Spots on the Google map, across the metro, where each firm ranks in the top three when people search for an injury lawyer. You are at the bottom.</p>
+    <div id="c-mapbars" class="space-y-2.5"></div>
+  </div>
+
   <div class="rounded-xl bg-brand-50 border border-brand-100 p-5">
     <div class="text-sm text-ink-600">What this means</div>
     <p class="text-lg text-ink-800 mt-1" id="c-means"></p>
   </div>
-  <div class="rounded-xl bg-ink-900 text-white p-6 text-center">
-    <div class="text-sm uppercase tracking-widest text-brand-300">The opportunity</div>
-    <div class="text-4xl font-extrabold mt-2" id="c-opp"></div>
-    <p class="text-sm text-white/80 mt-2" id="c-opp-sub"></p>
+
+  <div class="rounded-xl bg-ink-900 text-white p-6">
+    <div class="text-sm uppercase tracking-widest text-brand-300 text-center">The opportunity</div>
+    <div class="text-4xl font-extrabold mt-2 text-center" id="c-opp"></div>
+    <p class="text-sm text-white/80 mt-2 text-center" id="c-opp-sub"></p>
+    <div class="mt-6 space-y-3">
+      <div>
+        <div class="flex justify-between text-xs text-white/70 mb-1"><span>Leads from search today</span><span>almost none</span></div>
+        <div class="bg-white/10 rounded-full h-5 overflow-hidden"><div class="bg-white/30 h-5 rounded-full" style="width:3%"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between text-xs text-white/70 mb-1"><span>Possible once you are visible</span><span id="c-opp-poss"></span></div>
+        <div class="bg-white/10 rounded-full h-5 overflow-hidden"><div class="bg-accent-green h-5 rounded-full" style="width:100%"></div></div>
+      </div>
+    </div>
   </div>
   <div>
     <div class="text-sm font-bold uppercase tracking-wider text-ink-600 mb-2">What it takes</div>
@@ -43,7 +61,7 @@ tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','system-ui','sans-seri
 const DATA=JSON.parse(document.getElementById('data').textContent);
 const fmt=n=>(n==null||Number.isNaN(n))?'-':Number(n).toLocaleString();
 const el=id=>document.getElementById(id);
-const m=DATA.meta,d=DATA.demand,sc=DATA.leadmodel.scenarios,g=DATA.gbp||{};
+const m=DATA.meta,d=DATA.demand,sc=DATA.leadmodel.scenarios,g=DATA.gbp||{},mp=DATA.maps||{};
 el('c-date').textContent=m.prepared; el('c-firm').textContent=m.firm;
 el('c-diag').textContent='You have one of the best-reviewed injury firms in Atlanta, but almost nobody searching for a lawyer can find you. You show up for your name and very little else.';
 el('c-tiles').innerHTML=[
@@ -55,6 +73,21 @@ el('c-tiles').innerHTML=[
 el('c-means').textContent='About '+fmt(d.modeled_total_demand)+' people a month search for these services in metro Atlanta. Your competitors show up across the city and in AI answers. You mostly show up around your office, so that demand is going to them.';
 el('c-opp').textContent='~'+fmt(sc[1].leads)+' more leads a month';
 el('c-opp-sub').textContent='A realistic, modeled estimate once you are visible across the map, on the searches that matter, and in AI answers. We confirm it with tracking before we promise it.';
+el('c-opp-poss').textContent='~'+fmt(sc[1].leads)+' / mo';
+// Map scoreboard: competitors vs Flanagan (pure-CSS bars)
+(function(){
+ const short=s=>{s=String(s||'').split(/ - |:|,/)[0].trim(); return s.length>24?s.slice(0,22)+'...':s;};
+ const comps=(mp.leaderboard||[]).filter(r=>!r.is_client).slice(0,6).map(r=>({name:short(r.name),v:r.top3||0,me:false}));
+ const flan={name:'Flanagan Law (you)',v:(mp.client||{}).top3_cells||0,me:true};
+ const rows=comps.concat([flan]);
+ const max=Math.max.apply(null,rows.map(r=>r.v).concat([1]));
+ el('c-mapbars').innerHTML=rows.map(r=>`
+   <div class="flex items-center gap-2">
+     <div class="w-28 sm:w-36 text-[11px] sm:text-xs text-right truncate ${r.me?'font-bold text-accent-red':'text-ink-600'}">${r.name}</div>
+     <div class="flex-1 bg-slate-100 rounded-full h-5 overflow-hidden"><div class="h-5 rounded-full ${r.me?'bg-accent-red':'bg-brand-500'}" style="width:${Math.max(r.v/max*100,3)}%"></div></div>
+     <div class="w-5 text-[11px] text-right font-semibold ${r.me?'text-accent-red':'text-ink-600'}">${r.v}</div>
+   </div>`).join('');
+})();
 el('c-steps').innerHTML=[
  'Show up on the map across the whole metro, not just near your office.',
  'Make your service pages rank for the searches people actually use.',
